@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Grazie!</title>
+  <meta charset="UTF-8">
+  <style>
+    body { font-family: Arial; max-width: 600px; margin: 50px auto; padding: 20px; text-align: center; }
+    .message-box { background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0; text-align: left; white-space: pre-line; }
+    .copy-btn { background: #4CAF50; color: white; padding: 12px 24px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+    .copy-btn:hover { background: #45a049; }
+    #copied { color: green; margin-top: 10px; display: none; }
+  </style>
+</head>
+<body>
+  <h1>✅ Grazie!</h1>
+  <p>Ecco il messaggio da copiare:</p>
+  
+  <div class="message-box" id="messaggio"></div>
+  
+  <button class="copy-btn" onclick="copyMessage()">📋 Copia messaggio</button>
+  <p id="copied">✓ Copiato!</p>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const nome = params.get('nome') || '';
+    const commerciale = params.get('commerciale') || '';
+    const percorso = params.get('percorso') || '';
+    
+    const messaggio = `Nuovo cliente: ${nome}
+Nome commerciale: ${commerciale}
+Percorso: ${percorso}`;
+    
+    document.getElementById('messaggio').innerText = messaggio;
+    
+    function copyMessage() {
+      navigator.clipboard.writeText(document.getElementById('messaggio').innerText);
+      document.getElementById('copied').style.display = 'block';
+      setTimeout(() => document.getElementById('copied').style.display = 'none', 2000);
+    }
+  </script>
+</body>
+</html>
+```
+
+---
+
+### 4. Attiva GitHub Pages
+- Vai in **Settings** del repository
+- Menu sinistra: **"Pages"**
+- Source: **"Deploy from a branch"**
+- Branch: **"main"** → **"/ (root)"**
+- Clicca **Save**
+
+---
+
+### 5. Il tuo URL sarà:
+```
+https://TUOUSERNAME.github.io/grazie-page/
+```
+
+---
+
+### 6. Nel Form Trigger di n8n
+Metti come **Redirect URL**:
+```
+https://TUOUSERNAME.github.io/grazie-page/?nome={{ $json['Nome Completo Cliente'].replace(/ /g, '_') }}&commerciale={{ $json['Nome Commerciale'].replace(/ /g, '_') }}&percorso={{ $json['Percorso acquistato'].replace(/ /g, '_') }}
