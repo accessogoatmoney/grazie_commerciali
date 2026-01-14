@@ -44,10 +44,3 @@ Note: ${note}`;
   </script>
 </body>
 </html>
-```
-
----
-
-## 2. URL REDIRECT per n8n (da mettere nel campo Redirect)
-```
-https://TUOUSERNAME.github.io/grazie-page/?nome={{ $json['Nome Completo Cliente'].replace(/ /g, '_') }}&data_workshop={{ $json['DATA WORKSHOP PROVENIENZA CLIENTE'].replace(/ /g, '_') }}&percorso={{ $json['Percorso acquistato'].replace(/ /g, '_') }}&importo_totale={{ $json['IMPORTO TOTALE FATTURATO (COMPRESO DI IVA)'] }}&importo_pagato={{ $json['IMPORTO PAGATO ALLA FIRMA (COMPRESO DI IVA)'] }}&note={{ $json.Note?.replace(/ /g, '_') ?? '' }}
